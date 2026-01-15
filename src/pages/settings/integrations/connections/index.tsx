@@ -3,49 +3,46 @@ import {
     faMagnifyingGlass,
     faPencil,
     faArrowUpRightFromSquare,
+    faArrowDown,
+    faArrowUp
 } from '@fortawesome/free-solid-svg-icons';
-import {
-    faTrashCan,
-} from '@fortawesome/free-regular-svg-icons';
-import { useEffect, useState } from 'react';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Pagination from './pagination';
 import { Tag } from './tag';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { getManyIntegrationConnectionsAsync, integrationConnectionState } from '@/store/slices/integration-connection.slice';
+import {
+    getManyIntegrationConnectionsAsync,
+    integrationConnectionState,
+} from '@/store/slices/integration-connection.slice';
 import type { IntegrationConnection } from '@/data/data.types';
 import EditConnectionModal from './modal-edit';
 import DeleteConnectionModal from './modal-delete';
+
 const pageSize = 8;
 
-export default function IntegrationConnection() {
+type SortKey = 'integrationService' | 'name';
+type SortDir = 'asc' | 'desc';
 
-    const dispatch = useAppDispatch()
-    const { connections } = useAppSelector(integrationConnectionState)
+export default function IntegrationConnection() {
+    const dispatch = useAppDispatch();
+    const { connections } = useAppSelector(integrationConnectionState);
 
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-
     const [editOpen, setEditOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState<IntegrationConnection | null>(null);
 
-
-    useEffect(() => {
-        const start = (page - 1) * pageSize;
-        const keyword = query.trim().toLowerCase();
-        dispatch(getManyIntegrationConnectionsAsync({ start, pageSize, keyword }))
-            .then((res: any) => {
-                setTotalPages(res.payload.totalCount)
-            });
-    }, [page, pageSize, query])
+    const [sortKey, setSortKey] = useState<SortKey>('integrationService');
+    const [sortDir, setSortDir] = useState<SortDir>('asc');
 
     function onSearch(v: string) {
         setQuery(v);
         setPage(1);
     }
-
 
     function onEditRow(row: IntegrationConnection) {
         setSelectedRow(row);
@@ -57,9 +54,43 @@ export default function IntegrationConnection() {
         setDeleteOpen(true);
     }
 
+    const toggleSort = useCallback((key: SortKey) => {
+        setPage(1);
+
+        if (key !== sortKey) {
+            setSortKey(key);
+            setSortDir('asc');
+        } else {
+            setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+        }
+    }, [sortKey])
+
+
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            const start = (page - 1) * pageSize;
+            const keyword = query.trim().toLowerCase();
+
+            dispatch(getManyIntegrationConnectionsAsync({ start, pageSize, keyword, sortDir, sortKey }))
+                .then((res: any) => {
+                    setTotalPages(res.payload.totalCount);
+                });
+        }, 300);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [dispatch, page, query, sortDir, sortKey]);
+
+
+    const sortIcon = useMemo(() => {
+        return sortDir === 'asc' ? faArrowUp : faArrowDown
+    }, [sortDir]);
+
     return (
         <>
-            <div className='mt-6'>
+            <div className='mt-8'>
                 <h2 className='text-base font-semibold text-slate-900'>Existing Connections</h2>
 
                 {/* Search */}
@@ -80,14 +111,33 @@ export default function IntegrationConnection() {
 
                 {/* Table */}
                 <div className='h-full mt-4 overflow-hidden rounded-lg border border-border bg-white'>
-                    <table className='w-full text-sm'>
-                        <thead className='bg-slate-50 text-slate-600 text-xs'>
-                            <tr className='border-b border-gray-200/70'>
+                    <table className='w-full text-sm overflow-x-auto'>
+                        <thead className='bg-slate-50 text-slate-600 '>
+                            <tr className='border-b border-gray-200/70 text-xs'>
                                 <th className='w-8 px-3 py-3 text-left font-semibold' />
+
                                 <th className='px-3 py-3 text-left font-semibold'>
-                                    Integration <span className='text-slate-400'>↓</span>
+                                    <button
+                                        type='button'
+                                        onClick={() => toggleSort('integrationService')}
+                                        className='cursor-pointer inline-flex items-center gap-.5'
+                                    >
+                                        Integration
+                                        {sortKey === 'integrationService' && <FontAwesomeIcon icon={sortIcon} size='xs' className='text-slate-500' />}
+                                    </button>
                                 </th>
-                                <th className='px-3 py-3 text-left font-semibold'>Name</th>
+
+                                <th className='px-3 py-3 text-left font-semibold'>
+                                    <button
+                                        type='button'
+                                        onClick={() => toggleSort('name')}
+                                        className='cursor-pointer inline-flex items-center gap-.5'
+                                    >
+                                        Name
+                                        {sortKey === 'name' && <FontAwesomeIcon icon={sortIcon} size='xs' className='text-slate-500' />}
+                                    </button>
+                                </th>
+
                                 <th className='px-3 py-3 text-left font-semibold'>Source</th>
                                 <th className='px-3 py-3 text-left font-semibold'>Entity/Group</th>
                                 <th className='px-3 py-3 text-left font-semibold'>Interval</th>
@@ -99,23 +149,25 @@ export default function IntegrationConnection() {
 
                         <tbody className='divide-y divide-slate-100'>
                             {connections.map((c) => {
-                                const integration = c.integrationService
-                                const integrationName = integration?.name;
+                                const integration = c.integrationService as any;
+                                const integrationName = integration?.name ?? '';
+
                                 return (
-                                    <tr key={c.id} className="border-b border-gray-200/70 hover:bg-slate-50 ">
+                                    <tr key={c.id} className='border-b border-gray-200/70 hover:bg-slate-50'>
                                         <td className='px-3 py-3'>
-                                            <div className='h-6 w-6 rounded bg-sky-50 text-center text-xs font-bold leading-6 text-cyan-600'>
-                                                <img
-                                                    src={integration?.logo}
-                                                    alt={integrationName}
-                                                />
+                                            <div className='h-6 w-6 rounded bg-sky-50 text-center text-xs font-bold leading-6 text-cyan-600 overflow-hidden'>
+                                                {integration?.logo ? (
+                                                    <img src={integration.logo} alt={integrationName} />
+                                                ) : null}
                                             </div>
                                         </td>
 
-                                        <td className='px-3 py-3 text-slate-700'>{integrationName}</td>
+                                        <td className='px-3 py-3 max-w-48 truncate text-slate-700'>
+                                            {integrationName}
+                                        </td>
 
                                         <td className='px-3 py-3'>
-                                            <button type='button' className=' text-cyan-600'>
+                                            <button type='button' className='max-w-48 truncate text-cyan-600'>
                                                 {c.name}
                                             </button>
                                         </td>
@@ -124,18 +176,24 @@ export default function IntegrationConnection() {
                                             <Tag value={c.source} />
                                         </td>
 
-                                        <td className='px-3 py-3 text-slate-700'>{c.entityGroup}</td>
+                                        <td className='px-3 py-3 max-w-48 truncate text-slate-700'>{c.entityGroup}</td>
 
                                         <td className='px-3 py-3 text-slate-700'>{c.interval}</td>
 
                                         <td className='px-3 py-3'>
-                                            <button type='button' className='cursor-pointer text-cyan-600 hover:text-cyan-400'>
+                                            <button
+                                                type='button'
+                                                className='truncate cursor-pointer text-x text-cyan-600 hover:text-cyan-400'
+                                            >
                                                 Copy to Clipboard
                                             </button>
                                         </td>
 
                                         <td className='px-3 py-3'>
-                                            <button type='button' className='cursor-pointer inline-flex items-center gap-1 text-cyan-600 hover:underline hover:text-cyan-400'>
+                                            <button
+                                                type='button'
+                                                className='cursor-pointer inline-flex items-center gap-1 text-cyan-600 hover:underline hover:text-cyan-400'
+                                            >
                                                 View
                                                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-xs' />
                                             </button>
@@ -165,7 +223,7 @@ export default function IntegrationConnection() {
                                             </div>
                                         </td>
                                     </tr>
-                                )
+                                );
                             })}
 
                             {connections.length === 0 && (
@@ -189,7 +247,7 @@ export default function IntegrationConnection() {
                 row={selectedRow}
                 onClose={() => setEditOpen(false)}
                 onConfirm={(id) => {
-                    console.log("edit", id);
+                    console.log('edit', id);
                     setEditOpen(false);
                 }}
             />
@@ -199,12 +257,10 @@ export default function IntegrationConnection() {
                 row={selectedRow}
                 onClose={() => setDeleteOpen(false)}
                 onConfirm={(id) => {
-                    console.log("delete", id);
+                    console.log('delete', id);
                     setDeleteOpen(false);
                 }}
             />
-
         </>
-    )
+    );
 }
-

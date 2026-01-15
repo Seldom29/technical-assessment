@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { navState, setActiveNavItem } from '@/store/slices/nav.slice';
+import { useAppDispatch } from '@/store/hooks';
+import { setActiveNavItem } from '@/store/slices/nav.slice';
 
 import SidebarNav from './sidebar-nav'
 import SidebarLogo from './sidebar-logo';
