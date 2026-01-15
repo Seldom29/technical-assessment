@@ -12,26 +12,48 @@ type Props = {
     onPageChange: (p: number) => void;
 };
 
+const WINDOW = 5;
+
 export default function Pagination({ page, totalPages, onPageChange }: Props) {
     const pages = useMemo(() => {
         const out: (number | '…')[] = [];
-        if (totalPages <= 7) {
+
+        if (totalPages <= WINDOW + 2) {
             for (let i = 1; i <= totalPages; i++) out.push(i);
             return out;
         }
 
-        out.push(1);
-        if (page > 4) out.push('…');
+        const half = Math.floor(WINDOW / 2);
+        let start = Math.max(2, page - half);
+        let end = Math.min(totalPages - 1, page + half);
 
-        const start = Math.max(2, page - 1);
-        const end = Math.min(totalPages - 1, page + 1);
+        // shift window if near the start
+        if (page <= half + 1) {
+            start = 2;
+            end = WINDOW + 1;
+        }
+
+        // shift window if near the end
+        if (page >= totalPages - half) {
+            start = totalPages - WINDOW;
+            end = totalPages - 1;
+        }
+
+        // first page
+        out.push(1);
+
+        if (start > 2) out.push('…');
+
         for (let i = start; i <= end; i++) out.push(i);
 
-        if (page < totalPages - 3) out.push('…');
+        if (end < totalPages - 1) out.push('…');
+
+        // last page
         out.push(totalPages);
 
         return out;
     }, [page, totalPages]);
+
 
     const canPrev = page > 1;
     const canNext = page < totalPages;

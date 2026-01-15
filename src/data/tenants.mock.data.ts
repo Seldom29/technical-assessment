@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 import type { Tenant } from './data.types';
 
 faker.seed(2026);

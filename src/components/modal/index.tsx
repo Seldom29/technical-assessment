@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 type ModalProps = {
     open: boolean;

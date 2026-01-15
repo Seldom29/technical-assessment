@@ -1,5 +1,5 @@
 
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 
 import AmazonLogo from '@/assets/images/amazon_logo.png';
 import KafkaLogo from '@/assets/images/kafka_logo.png';
@@ -13,33 +13,33 @@ faker.seed(2026);
 
 const services = [
     {
-        name: "Amazon QuickSight",
-        description: "Amazon BI service to create dashboards and interactive visualisations.",
+        name: 'Amazon QuickSight',
+        description: 'Amazon BI service to create dashboards and interactive visualisations.',
         logo: AmazonLogo,
     },
     {
-        name: "Kafka",
-        description: "Real-time data streaming, event-driven architectures and messaging systems.",
+        name: 'Kafka',
+        description: 'Real-time data streaming, event-driven architectures and messaging systems.',
         logo: KafkaLogo,
     },
     {
-        name: "Power BI",
-        description: "Microsoft BI service to create dashboards and data visualisations.",
+        name: 'Power BI',
+        description: 'Microsoft BI service to create dashboards and data visualisations.',
         logo: PowerLogo,
     },
     {
-        name: "Zapier",
-        description: "Automation tool that connects various apps and services to automate workflows.",
+        name: 'Zapier',
+        description: 'Automation tool that connects various apps and services to automate workflows.',
         logo: ZapierLogo,
     },
     {
-        name: "Tableau",
-        description: "BI service that helps seeing and transforming data into actionable insights.",
+        name: 'Tableau',
+        description: 'BI service that helps seeing and transforming data into actionable insights.',
         logo: TableauLogo,
     },
     {
-        name: "Measurabl",
-        description: "Enable the push and pull of data to and from Measurabl via an API.",
+        name: 'Measurabl',
+        description: 'Enable the push and pull of data to and from Measurabl via an API.',
         logo: MeasurablLogo,
     },
 ];

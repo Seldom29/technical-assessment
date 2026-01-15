@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import SidebarNavItem from './sidebar-nav-item';
 import type { NavItemConfig } from '@/data/nav-items.data';
 import { useAppSelector } from '@/store/hooks';

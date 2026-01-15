@@ -6,16 +6,16 @@ import Sidebar from './sidebar'
 
 export default function AppLayout() {
   return (
-    <div className="min-h-screen flex bg-page overflow-hidden">
+    <div className='min-h-screen flex bg-page overflow-hidden'>
       <Sidebar />
 
-      <div className="flex flex-col h-screen w-full overflow-hidden">
+      <div className='flex flex-col h-screen w-full overflow-hidden'>
         <Header />
 
-        <div className="flex flex-1 min-h-0 overflow-hidden">
+        <div className='flex flex-1 min-h-0 overflow-hidden'>
           <SubNav />
 
-          <main className="flex-1 min-h-0 p-6 overflow-y-auto">
+          <main className='flex-1 min-h-0 p-6 overflow-y-auto'>
             <Outlet />
           </main>
         </div>

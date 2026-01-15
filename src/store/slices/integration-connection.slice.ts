@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "..";
-import { IntegrationConnectionApi } from "@/api/integration-connection.api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { RootState } from '..';
+import { IntegrationConnectionApi } from '@/api/integration-connection.api';
 import type { PaginationConfig } from '@/api';
 import type { IntegrationConnection } from '@/data/data.types';
 
@@ -13,7 +13,7 @@ const initialState: IntegrationConnectionState = {
 };
 
 export const getManyIntegrationConnectionsAsync = createAsyncThunk(
-    "integrationConnection/getAll",
+    'integrationConnection/getAll',
     async (pagination: PaginationConfig) => await IntegrationConnectionApi.getMany(pagination)
 );
 
@@ -21,7 +21,7 @@ export const integrationConnectionState = (state: RootState) =>
     state.integrationConnection;
 
 const integrationConnectionSlice = createSlice({
-    name: "integrationConnection",
+    name: 'integrationConnection',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
