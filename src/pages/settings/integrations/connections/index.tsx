@@ -102,7 +102,7 @@ export default function IntegrationConnection() {
                                 const integration = c.integrationService
                                 const integrationName = integration?.name;
                                 return (
-                                    <tr className="border-b border-gray-200/70 hover:bg-slate-50 ">
+                                    <tr key={c.id} className="border-b border-gray-200/70 hover:bg-slate-50 ">
                                         <td className='px-3 py-3'>
                                             <div className='h-6 w-6 rounded bg-sky-50 text-center text-xs font-bold leading-6 text-cyan-600'>
                                                 <img

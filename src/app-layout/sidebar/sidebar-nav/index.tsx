@@ -1,25 +1,27 @@
 import { useCallback } from 'react';
+import { useLocation } from "react-router-dom";
 import SidebarNavItem from './sidebar-nav-item';
 import type { NavItemConfig } from '@/data/nav-items.data';
+import { useAppSelector } from '@/store/hooks';
+import { navState } from '@/store/slices/nav.slice';
 
 type SidebarNavProps = {
-    navItems: NavItemConfig[]
-    activeNavItem: NavItemConfig | null;
     onSelect: (navItem: NavItemConfig) => void;
 };
 
 export default function SidebarNav({
-    navItems,
-    activeNavItem,
     onSelect,
 }: SidebarNavProps) {
+    const { pathname } = useLocation();
+    const { navItems, activeNavItem } = useAppSelector(navState)
+
     const mainItems = navItems.filter((i) => i.position !== 'footer');
     const footerItems = navItems.filter((i) => i.position === 'footer');
 
     const isActive = useCallback((navItem: NavItemConfig) => {
-        return navItem.route === activeNavItem?.route ||
-            navItem.children?.some(n => n.children?.some(c => c.route === activeNavItem?.route))
-    }, [activeNavItem?.label])
+        const route = activeNavItem?.route || pathname
+        return navItem.route === route || navItem.children?.some(n => n.children?.some(c => c.route === route))
+    }, [activeNavItem?.route])
 
     const handleNavItemClick = useCallback((navItem: NavItemConfig) => () => {
         onSelect(navItem)

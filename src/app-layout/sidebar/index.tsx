@@ -9,7 +9,6 @@ import type { NavItemConfig } from '@/data/nav-items.data';
 export default function Sidebar() {
 
     const dispatch = useAppDispatch();
-    const { navItems, activeNavItem: activeNavITem } = useAppSelector(navState)
 
     const handleSetActiveNavItem = (navItem: NavItemConfig) => {
         dispatch(setActiveNavItem(navItem));
@@ -19,7 +18,7 @@ export default function Sidebar() {
         <aside className='h-screen flex inset-y-0 grow text-white'>
             <div className='flex w-16 h-full bg-sidebar flex-col items-center py-2'>
                 <SidebarLogo src={Logo} alt='BraveGen' />
-                <SidebarNav navItems={navItems} activeNavItem={activeNavITem} onSelect={handleSetActiveNavItem} />
+                <SidebarNav onSelect={handleSetActiveNavItem} />
             </div>
         </aside>
     );

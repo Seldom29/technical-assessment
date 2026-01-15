@@ -1,12 +1,14 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { navState, setActiveNavItem } from '@/store/slices/nav.slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
 import type { NavItemConfig } from '@/data/nav-items.data';
 
 export default function SubNav() {
     const dispatch = useAppDispatch();
+
+    const { pathname } = useLocation();
     const { activeNavItem, navItems } = useAppSelector(navState)
 
     const handleSetActiveNavItem = (navItem: NavItemConfig) => {
@@ -21,15 +23,10 @@ export default function SubNav() {
         )?.children;
 
     const children = useMemo(() => {
-        const route = activeNavItem?.route;
+        const route = activeNavItem?.route || pathname;
         if (!route) return activeNavItem?.children ?? [];
-
-        return (
-            findContextByRoute(navItems, route) ??
-            activeNavItem?.children ??
-            []
-        );
-    }, [activeNavItem?.route, activeNavItem?.children, navItems]);
+        return (findContextByRoute(navItems, route) ?? activeNavItem?.children ?? []);
+    }, [activeNavItem, navItems, pathname]);
 
     if (!children.length) {
         return null
