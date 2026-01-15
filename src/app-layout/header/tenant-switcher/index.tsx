@@ -18,11 +18,17 @@ type TenantSwitcherProps = {
 };
 
 function initials(name: string) {
-    const parts = name.trim().split(/\s+/).filter(Boolean);
-    const a = parts[0]?.[0] ?? '';
-    const b = parts[1]?.[0] ?? parts[0]?.[1] ?? '';
+    const lettersOnly = name
+        .split(/\s+/)
+        .map(part => part.replace(/[^a-zA-Z]/g, ''))
+        .filter(Boolean);
+
+    const a = lettersOnly[0]?.[0] ?? '';
+    const b = lettersOnly[1]?.[0] ?? lettersOnly[0]?.[1] ?? '';
+
     return (a + b).toUpperCase();
 }
+
 
 export default function TenantSwitcher({ tenants, tenant, onChange }: TenantSwitcherProps) {
     const [open, setOpen] = useState(false);
