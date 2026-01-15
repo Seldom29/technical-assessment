@@ -15,7 +15,7 @@ export class IntegrationConnectionApi {
                 connections = connections.slice(start, start + pageSize)
 
                 resolve({ list: connections, totalCount: totalPages });
-            }, 300);
+            }, 0);
         });
     }
 }

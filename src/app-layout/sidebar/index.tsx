@@ -16,7 +16,7 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className='min-h-screen flex inset-y-0 grow text-white'>
+        <aside className='h-screen flex inset-y-0 grow text-white'>
             <div className='flex w-16 h-full bg-sidebar flex-col items-center py-2'>
                 <SidebarLogo src={Logo} alt='BraveGen' />
                 <SidebarNav navItems={navItems} activeNavItem={activeNavITem} onSelect={handleSetActiveNavItem} />

@@ -5,7 +5,7 @@ export class IntegrationServiceApi {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(INTEGRATION_SERVICES);
-            }, 300);
+            }, 0);
         });
     }
 }

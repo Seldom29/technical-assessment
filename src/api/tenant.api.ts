@@ -5,7 +5,7 @@ export class TenantApi {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(TENANTS);
-            }, 300);
+            }, 0);
         });
     }
 }
