@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "..";
 import { IntegrationConnectionApi } from "@/api/integration-connection.api";
-import { type IntegrationConnection } from '@/data/integration-connection.mock.data';
 import type { PaginationConfig } from '@/api';
+import type { IntegrationConnection } from '@/data/data.types';
 
 export type IntegrationConnectionState = {
     connections: IntegrationConnection[];

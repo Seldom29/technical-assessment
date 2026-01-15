@@ -1,9 +1,5 @@
 import { faker } from "@faker-js/faker";
-
-export type Tenant = {
-    id: string;
-    name: string;
-};
+import type { Tenant } from './data.types';
 
 faker.seed(2026);
 

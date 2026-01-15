@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import { IntegrationServiceApi } from '@/api/integration-service.api';
-import type { IntegrationService } from '@/data/integration-services.mock.data';
+import type { IntegrationService } from '@/data/data.types';
 
 export type IntegrationServiceState = {
     services: IntegrationService[];

@@ -1,21 +1,8 @@
 import { faker } from "@faker-js/faker";
-import { TENANTS, type Tenant } from './tenants.mock.data';
-import { INTEGRATION_SERVICES, type IntegrationService } from './integration-services.mock.data';
+import { TENANTS } from './tenants.mock.data';
+import { INTEGRATION_SERVICES } from './integration-services.mock.data';
+import type { IntegrationConnection } from './data.types';
 
-export type IntegrationConnection = {
-    id: string;
-    name: string;
-    source: 'Carbon' | 'Utility';
-    interval: '-' | 'Monthly' | 'Yearly' | 'ToU';
-    connectorUrl: string;
-    instructions?: string;
-    entityGroup: string;
-    tenantId: string;
-    integrationServiceId: string;
-
-    tenant?: Tenant;
-    integrationService?: IntegrationService
-};
 
 faker.seed(2026);
 

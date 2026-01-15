@@ -1,5 +1,6 @@
-import { generateConnections, type IntegrationConnection } from '@/data/integration-connection.mock.data';
+import { generateConnections } from '@/data/integration-connection.mock.data';
 import type { PaginationConfig } from '.';
+import type { IntegrationConnection } from '@/data/data.types';
 
 export class IntegrationConnectionApi {
     static async getMany({ keyword, start, pageSize }: PaginationConfig): Promise<{

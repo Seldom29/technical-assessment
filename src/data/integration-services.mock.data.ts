@@ -7,14 +7,7 @@ import PowerLogo from '@/assets/images/power_logo.png';
 import ZapierLogo from '@/assets/images/zapier_logo.png';
 import TableauLogo from '@/assets/images/tableau_logo.png';
 import MeasurablLogo from '@/assets/images/measurabl_logo.png';
-
-export type IntegrationService = {
-    id: string;
-    name: string;
-    description: string;
-    logo?: string;
-};
-
+import type { IntegrationService } from './data.types';
 
 faker.seed(2026);
 

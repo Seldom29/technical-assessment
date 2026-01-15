@@ -1,4 +1,5 @@
-import { INTEGRATION_SERVICES, type IntegrationService } from '@/data/integration-services.mock.data';
+import type { IntegrationService } from '@/data/data.types';
+import { INTEGRATION_SERVICES } from '@/data/integration-services.mock.data';
 
 export class IntegrationServiceApi {
     static async getAll(): Promise<IntegrationService[]> {
