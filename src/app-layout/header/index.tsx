@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { navState } from '@/store/slices/nav.slice';
 import TenantSwitcher from './tenant-switcher';
 import { getAllTenantAsync, setTenant, tenantState } from '@/store/slices/tenant.slice';

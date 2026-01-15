@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch } from '@/hooks/redux';
 import { setActiveNavItem } from '@/store/slices/nav.slice';
 
 import SidebarNav from './sidebar-nav'

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { getAllIntegrationServicesAsync, integrationServiceState } from '@/store/slices/integration-service.slice'
 import { useEffect } from 'react'
 

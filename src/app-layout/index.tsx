@@ -3,8 +3,11 @@ import { Outlet } from 'react-router-dom';
 import Header from './header'
 import SubNav from './sub-nav'
 import Sidebar from './sidebar'
+import { useRouteDocumentTitle } from '@/hooks/document-title';
 
 export default function AppLayout() {
+
+  useRouteDocumentTitle()
   return (
     <div className='min-h-screen flex bg-page overflow-hidden'>
       <Sidebar />

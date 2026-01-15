@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { navState, setActiveNavItem } from '@/store/slices/nav.slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink, useLocation } from 'react-router-dom';
