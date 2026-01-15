@@ -111,131 +111,133 @@ export default function IntegrationConnection() {
 
                 {/* Table */}
                 <div className='h-full mt-4 overflow-hidden rounded-lg border border-border bg-white'>
-                    <table className='w-full text-sm overflow-x-auto'>
-                        <thead className='bg-slate-50 text-slate-600 '>
-                            <tr className='border-b border-gray-200/70 text-xs'>
-                                <th className='w-8 px-3 py-3 text-left font-semibold' />
+                    <div className='overflow-x-auto'> 
+                        <table className='w-full text-sm'>
+                            <thead className='bg-slate-50 text-slate-600 '>
+                                <tr className='border-b border-gray-200/70 text-xs'>
+                                    <th className='w-8 px-3 py-3 text-left font-semibold' />
 
-                                <th className='px-3 py-3 text-left font-semibold'>
-                                    <button
-                                        type='button'
-                                        onClick={() => toggleSort('integrationService')}
-                                        className='cursor-pointer inline-flex items-center gap-.5'
-                                    >
-                                        Integration
-                                        {sortKey === 'integrationService' && <FontAwesomeIcon icon={sortIcon} size='xs' className='text-slate-500' />}
-                                    </button>
-                                </th>
+                                    <th className='px-3 py-3 text-left font-semibold'>
+                                        <button
+                                            type='button'
+                                            onClick={() => toggleSort('integrationService')}
+                                            className='cursor-pointer inline-flex items-center gap-.5'
+                                        >
+                                            Integration
+                                            {sortKey === 'integrationService' && <FontAwesomeIcon icon={sortIcon} size='xs' className='text-slate-500' />}
+                                        </button>
+                                    </th>
 
-                                <th className='px-3 py-3 text-left font-semibold'>
-                                    <button
-                                        type='button'
-                                        onClick={() => toggleSort('name')}
-                                        className='cursor-pointer inline-flex items-center gap-.5'
-                                    >
-                                        Name
-                                        {sortKey === 'name' && <FontAwesomeIcon icon={sortIcon} size='xs' className='text-slate-500' />}
-                                    </button>
-                                </th>
+                                    <th className='px-3 py-3 text-left font-semibold'>
+                                        <button
+                                            type='button'
+                                            onClick={() => toggleSort('name')}
+                                            className='cursor-pointer inline-flex items-center gap-.5'
+                                        >
+                                            Name
+                                            {sortKey === 'name' && <FontAwesomeIcon icon={sortIcon} size='xs' className='text-slate-500' />}
+                                        </button>
+                                    </th>
 
-                                <th className='px-3 py-3 text-left font-semibold'>Source</th>
-                                <th className='px-3 py-3 text-left font-semibold'>Entity/Group</th>
-                                <th className='px-3 py-3 text-left font-semibold'>Interval</th>
-                                <th className='px-3 py-3 text-left font-semibold'>Connector URL</th>
-                                <th className='px-3 py-3 text-left font-semibold'>Instructions</th>
-                                <th className='px-3 py-3 w-24 text-right font-semibold' />
-                            </tr>
-                        </thead>
+                                    <th className='px-3 py-3 text-left font-semibold'>Source</th>
+                                    <th className='px-3 py-3 text-left font-semibold'>Entity/Group</th>
+                                    <th className='px-3 py-3 text-left font-semibold'>Interval</th>
+                                    <th className='px-3 py-3 text-left font-semibold'>Connector URL</th>
+                                    <th className='px-3 py-3 text-left font-semibold'>Instructions</th>
+                                    <th className='px-3 py-3 w-24 text-right font-semibold' />
+                                </tr>
+                            </thead>
 
-                        <tbody className='divide-y divide-slate-100'>
-                            {connections.map((c) => {
-                                const integration = c.integrationService as any;
-                                const integrationName = integration?.name ?? '';
+                            <tbody className='divide-y divide-slate-100'>
+                                {connections.map((c) => {
+                                    const integration = c.integrationService as any;
+                                    const integrationName = integration?.name ?? '';
 
-                                return (
-                                    <tr key={c.id} className='border-b border-gray-200/70 hover:bg-slate-50'>
-                                        <td className='px-3 py-3'>
-                                            <div className='h-6 w-6 rounded bg-sky-50 text-center text-xs font-bold leading-6 text-cyan-600 overflow-hidden'>
-                                                {integration?.logo ? (
-                                                    <img src={integration.logo} alt={integrationName} />
-                                                ) : null}
-                                            </div>
-                                        </td>
+                                    return (
+                                        <tr key={c.id} className='border-b border-gray-200/70 hover:bg-slate-50'>
+                                            <td className='px-3 py-3'>
+                                                <div className='h-6 w-6 rounded bg-sky-50 text-center text-xs font-bold leading-6 text-cyan-600 overflow-hidden'>
+                                                    {integration?.logo ? (
+                                                        <img src={integration.logo} alt={integrationName} />
+                                                    ) : null}
+                                                </div>
+                                            </td>
 
-                                        <td className='px-3 py-3 max-w-48 truncate text-slate-700'>
-                                            {integrationName}
-                                        </td>
+                                            <td className='px-3 py-3 max-w-48 truncate text-slate-700'>
+                                                {integrationName}
+                                            </td>
 
-                                        <td className='px-3 py-3'>
-                                            <button type='button' className='max-w-48 truncate text-cyan-600'>
-                                                {c.name}
-                                            </button>
-                                        </td>
+                                            <td className='px-3 py-3'>
+                                                <button type='button' className='max-w-48 truncate text-cyan-600'>
+                                                    {c.name}
+                                                </button>
+                                            </td>
 
-                                        <td className='px-3 py-3'>
-                                            <Tag value={c.source} />
-                                        </td>
+                                            <td className='px-3 py-3'>
+                                                <Tag value={c.source} />
+                                            </td>
 
-                                        <td className='px-3 py-3 max-w-48 truncate text-slate-700'>{c.entityGroup}</td>
+                                            <td className='px-3 py-3 max-w-48 truncate text-slate-700'>{c.entityGroup}</td>
 
-                                        <td className='px-3 py-3 text-slate-700'>{c.interval}</td>
+                                            <td className='px-3 py-3 text-slate-700'>{c.interval}</td>
 
-                                        <td className='px-3 py-3'>
-                                            <button
-                                                type='button'
-                                                className='truncate cursor-pointer text-x text-cyan-600 hover:text-cyan-400'
-                                            >
-                                                Copy to Clipboard
-                                            </button>
-                                        </td>
-
-                                        <td className='px-3 py-3'>
-                                            <button
-                                                type='button'
-                                                className='cursor-pointer inline-flex items-center gap-1 text-cyan-600 hover:underline hover:text-cyan-400'
-                                            >
-                                                View
-                                                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-xs' />
-                                            </button>
-                                        </td>
-
-                                        <td className='px-3 py-3'>
-                                            <div className='flex justify-end gap-2'>
+                                            <td className='px-3 py-3'>
                                                 <button
                                                     type='button'
-                                                    onClick={() => onEditRow(c)}
-                                                    className='cursor-pointer grid h-8 w-8 place-items-center rounded border border-border text-slate-600 hover:bg-gray-200'
-                                                    aria-label='Edit'
-                                                    title='Edit'
+                                                    className='truncate cursor-pointer text-x text-cyan-600 hover:text-cyan-400'
                                                 >
-                                                    <FontAwesomeIcon icon={faPencil} className='text-sm' />
+                                                    Copy to Clipboard
                                                 </button>
+                                            </td>
 
+                                            <td className='px-3 py-3'>
                                                 <button
                                                     type='button'
-                                                    onClick={() => onDeleteRow(c)}
-                                                    className='cursor-pointer grid h-8 w-8 place-items-center rounded bg-red-400 text-white hover:bg-red-500'
-                                                    aria-label='Delete'
-                                                    title='Delete'
+                                                    className='cursor-pointer inline-flex items-center gap-1 text-cyan-600 hover:underline hover:text-cyan-400'
                                                 >
-                                                    <FontAwesomeIcon icon={faTrashCan} className='text-sm' />
+                                                    View
+                                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-xs' />
                                                 </button>
-                                            </div>
+                                            </td>
+
+                                            <td className='px-3 py-3'>
+                                                <div className='flex justify-end gap-2'>
+                                                    <button
+                                                        type='button'
+                                                        onClick={() => onEditRow(c)}
+                                                        className='cursor-pointer grid h-8 w-8 place-items-center rounded border border-border text-slate-600 hover:bg-gray-200'
+                                                        aria-label='Edit'
+                                                        title='Edit'
+                                                    >
+                                                        <FontAwesomeIcon icon={faPencil} className='text-sm' />
+                                                    </button>
+
+                                                    <button
+                                                        type='button'
+                                                        onClick={() => onDeleteRow(c)}
+                                                        className='cursor-pointer grid h-8 w-8 place-items-center rounded bg-red-400 text-white hover:bg-red-500'
+                                                        aria-label='Delete'
+                                                        title='Delete'
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrashCan} className='text-sm' />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+
+                                {connections.length === 0 && (
+                                    <tr>
+                                        <td colSpan={9} className='px-4 py-10 text-center text-slate-500'>
+                                            No connections found.
                                         </td>
                                     </tr>
-                                );
-                            })}
+                                )}
+                            </tbody>
+                        </table>
 
-                            {connections.length === 0 && (
-                                <tr>
-                                    <td colSpan={9} className='px-4 py-10 text-center text-slate-500'>
-                                        No connections found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-
+                    </div>
                     <div className='border-t border-slate-100 bg-white px-4 py-3'>
                         <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
                     </div>

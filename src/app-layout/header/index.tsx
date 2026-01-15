@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { navState } from '@/store/slices/nav.slice';
 import TenantSwitcher from './tenant-switcher';
@@ -30,11 +30,17 @@ export default function Header() {
     dispatch(setTenant(tenant))
   }
 
+  const sortedTenants = useMemo(() => {
+    return [...tenants].sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+    );
+  }, [tenants]);
+
   return (
     <header className='flex items-center w-full left-64 right-0 top-0 h-16 bg-surface border-b border-border'>
 
       <div className='flex-none items-center text-xs w-65 px-6 text-gray-600'>
-        <TenantSwitcher tenants={tenants} tenant={tenant} onChange={handleTenantChange} />
+        <TenantSwitcher tenants={sortedTenants} tenant={tenant} onChange={handleTenantChange} />
       </div>
 
       <div className='flex w-full justify-between items-center gap-'>
@@ -82,7 +88,7 @@ export default function Header() {
 
             <span
               className='
-                          absolute -top-1 -right-1
+                          absolute -top-1 -right-0.5
                           flex h-4 min-w-4 items-center justify-center
                           rounded-full bg-red-400
                           px-1 text-[10px] font-semibold text-white
