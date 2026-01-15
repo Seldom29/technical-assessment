@@ -19,18 +19,18 @@ export default function SidebarNavItem({
 }: SidebarNavItemProps) {
 
     const baseClasses = [
-        "group flex flex-col items-center gap-1 text-xs transition",
+        'group flex flex-col items-center gap-1 text-xs transition cursor-pointer',
         active
-            ? "text-brand/90"
-            : "text-white/80 hover:text-brand",
-    ].join(" ");
+            ? 'text-brand/90'
+            : 'text-white/80 hover:text-brand',
+    ].join(' ');
 
     const iconClasses = [
-        "text-lg transition-colors",
+        'text-lg transition-colors',
         active
-            ? "text-brand/90"
-            : "text-white/80 group-hover:text-brand",
-    ].join(" ");
+            ? 'text-brand/90'
+            : 'text-white/80 group-hover:text-brand',
+    ].join(' ');
 
     if (route) {
         return (
@@ -42,8 +42,8 @@ export default function SidebarNavItem({
                 className={({ isActive }) =>
                     [
                         baseClasses,
-                        isActive ? "text-brand/90" : "",
-                    ].join(" ")
+                        isActive ? 'text-brand/90' : '',
+                    ].join(' ')
                 }
             >
                 <FontAwesomeIcon icon={icon} className={iconClasses} />
@@ -54,7 +54,7 @@ export default function SidebarNavItem({
 
     return (
         <button
-            type="button"
+            type='button'
             title={label}
             aria-label={label}
             onClick={onClick}

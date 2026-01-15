@@ -9,7 +9,8 @@ import {
     faSitemap,
     faCity,
     faTable,
-    faTv
+    faTv,
+    faLink
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -21,34 +22,34 @@ import {
     faCamera,
 } from '@fortawesome/free-regular-svg-icons';
 
-import type { SidebarNavItemConfig } from '../app-layout/sidebar/sidebar-nav';
+import type { NavItemConfig } from '../app-layout/sidebar/sidebar-nav';
 
 import { ROUTES } from '@/routes/paths';
 
-export const navItems: SidebarNavItemConfig[] = [
-    { section: 'Insights', icon: faGaugeHigh, sections: [], route: ROUTES.insights },
-    { section: 'Collect', icon: faHardDrive, sections: [], route: ROUTES.collect },
-    { section: 'Reviews', icon: faThumbsUp, sections: [], route: ROUTES.reviews },
-    { section: 'Carbon', icon: faTree, sections: [], route: ROUTES.carbon },
-    { section: 'Utilities', icon: faShower, sections: [], route: ROUTES.utilities },
-    { section: 'Reports', icon: faFilePowerpoint, sections: [], route: ROUTES.reports },
-    { section: 'Actions', icon: faClipboardCheck, sections: [], route: ROUTES.actions },
+export const navItems: NavItemConfig[] = [
+    { label: 'Insights', icon: faGaugeHigh, children: [], route: ROUTES.insights },
+    { label: 'Collect', icon: faHardDrive, children: [], route: ROUTES.collect },
+    { label: 'Reviews', icon: faThumbsUp, children: [], route: ROUTES.reviews },
+    { label: 'Carbon', icon: faTree, children: [], route: ROUTES.carbon },
+    { label: 'Utilities', icon: faShower, children: [], route: ROUTES.utilities },
+    { label: 'Reports', icon: faFilePowerpoint, children: [], route: ROUTES.reports },
+    { label: 'Actions', icon: faClipboardCheck, children: [], route: ROUTES.actions },
     {
-        section: 'Settings',
+        label: 'Settings',
         icon: faGear,
         position: 'footer',
-        sections: [
+        children: [
             {
-                section: 'Organisation',
+                label: 'Organisation',
                 children: [
                     { label: 'Manage', icon: faHouse, route: ROUTES.settings.manage },
                     { label: 'Users', icon: faUsers, route: ROUTES.settings.users },
                     { label: 'Tags', icon: faTags, route: ROUTES.settings.tags },
-                    { label: 'Integrations', route: ROUTES.settings.integrations },
+                    { label: 'Integrations', icon: faLink, route: ROUTES.settings.integrations },
                 ],
             },
             {
-                section: 'Utilities',
+                label: 'Utilities',
                 children: [
                     { label: 'Configuration', icon: faGear, route: ROUTES.settings.utilities.configuration },
                     { label: 'Hierarchy', icon: faSitemap, route: ROUTES.settings.utilities.hierarchy },
@@ -56,7 +57,7 @@ export const navItems: SidebarNavItemConfig[] = [
                 ],
             },
             {
-                section: 'Carbon',
+                label: 'Carbon',
                 children: [
                     { label: 'Configuration', icon: faGear, route: ROUTES.settings.carbon.configuration },
                     { label: 'Hierarchy', icon: faSitemap, route: ROUTES.settings.carbon.hierarchy },
@@ -66,7 +67,7 @@ export const navItems: SidebarNavItemConfig[] = [
                 ],
             },
             {
-                section: 'Displays',
+                label: 'Displays',
                 children: [{ label: 'Manage', icon: faTv, route: ROUTES.settings.displays.manage }],
             },
         ],

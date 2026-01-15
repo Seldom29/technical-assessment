@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import type { ThunkAction, Action } from '@reduxjs/toolkit';
 
 import navReducer from './slices/nav.slice';
+import tenantReducer from './slices/tenant.slice';
 
 export const store = configureStore({
   reducer: {
     nav: navReducer,
+    tenant: tenantReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

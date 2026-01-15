@@ -5,6 +5,14 @@ import { ROUTES } from '../paths';
 
 const insightsRoutes: RouteObject[] = [
   {
+    index: true,
+    element: (
+      <NotImplementedPage
+        title='Insights'
+      />
+    ),
+  },
+  {
     path: relativePath(ROUTES.insights),
     element: <NotImplementedPage title="Insights" />,
   },

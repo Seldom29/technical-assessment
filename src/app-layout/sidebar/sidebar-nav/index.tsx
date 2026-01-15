@@ -3,42 +3,20 @@ import SidebarNavItem from './sidebar-nav-item';
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-export type SidebarNavItemName =
-    | 'Insights'
-    | 'Collect'
-    | 'Reviews'
-    | 'Carbon'
-    | 'Utilities'
-    | 'Reports'
-    | 'Actions'
-    | 'Settings';
-
-
-export type NavSectionItem = {
+export type NavItemConfig = {
     label: string;
-    route: string;
-    icon?: any;
-    disabled?: boolean;
-};
-
-export type NavSection = {
-    section: string;
-    children: NavSectionItem[];
-};
-
-export type SidebarNavItemConfig = {
-    section: SidebarNavItemName;
-    icon: IconDefinition;
+    icon?: IconDefinition;
     active?: boolean;
     route?: string;
     position?: 'main' | 'footer';
-    sections: NavSection[]
+    children?: NavItemConfig[],
+    disabled?: boolean
 };
 
 type SidebarNavProps = {
-    navItems: SidebarNavItemConfig[]
-    activeNavItem: SidebarNavItemConfig | null;
-    onSelect: (navItem: SidebarNavItemConfig) => void;
+    navItems: NavItemConfig[]
+    activeNavItem: NavItemConfig | null;
+    onSelect: (navItem: NavItemConfig) => void;
 };
 
 export default function SidebarNav({
@@ -49,11 +27,11 @@ export default function SidebarNav({
     const mainItems = navItems.filter((i) => i.position !== 'footer');
     const footerItems = navItems.filter((i) => i.position === 'footer');
 
-    const isActive = useCallback((name: SidebarNavItemName) => {
-        return name === activeNavItem?.section
-    }, [activeNavItem?.section])
+    const isActive = useCallback((name: string) => {
+        return name === activeNavItem?.label
+    }, [activeNavItem?.label])
 
-    const handleNavItemClick = useCallback((navItem: SidebarNavItemConfig) => () => {
+    const handleNavItemClick = useCallback((navItem: NavItemConfig) => () => {
         onSelect(navItem)
     }, [onSelect])
 
@@ -64,11 +42,11 @@ export default function SidebarNav({
                 <nav className='flex flex-col items-center gap-5'>
                     {mainItems.map((item) => (
                         <SidebarNavItem
-                            key={item.section}
+                            key={item.label}
                             icon={item.icon}
-                            label={item.section}
+                            label={item.label}
                             route={item.route}
-                            active={isActive(item.section)}
+                            active={isActive(item.label)}
                             onClick={handleNavItemClick(item)}
                         />
                     ))}
@@ -76,13 +54,13 @@ export default function SidebarNav({
             </div>
 
             {/* Footer section */}
-            <div>
+            <div className='py-4'>
                 {footerItems.map((item) => (
                     <SidebarNavItem
-                        key={item.section}
+                        key={item.label}
                         icon={item.icon}
-                        label={item.section}
-                        active={isActive(item.section)}
+                        label={item.label}
+                        active={isActive(item.label)}
                         onClick={handleNavItemClick(item)}
                     />
                 ))}

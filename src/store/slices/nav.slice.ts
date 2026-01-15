@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { SidebarNavItemConfig } from '../../app-layout/sidebar/sidebar-nav';
+import type { NavItemConfig } from '../../app-layout/sidebar/sidebar-nav';
 import { navItems } from '../../data/nav-items.data';
 import type { RootState } from '..';
 
 export type NavState = {
-    activeNavItem: SidebarNavItemConfig | null;
-    navItems: SidebarNavItemConfig[];
+    activeNavItem: NavItemConfig | null;
+    navItems: NavItemConfig[];
 };
 
 const initialState: NavState = {
-    activeNavItem: navItems.find(n => n.section === 'Settings') || null,
+    activeNavItem: null,
     navItems: navItems,
 };
 
@@ -22,7 +22,7 @@ const navSlice = createSlice({
     reducers: {
         setActiveNavItem(
             state,
-            action: PayloadAction<SidebarNavItemConfig>
+            action: PayloadAction<NavItemConfig>
         ) {
             state.activeNavItem = action.payload;
         },

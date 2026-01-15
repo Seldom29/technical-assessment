@@ -4,15 +4,6 @@ import NotImplementedPage from '@/pages/not-implemented';
 import { relativePath } from '../helper';
 
 const settingsRoutes: RouteObject[] = [
-  {
-    index: true,
-    element: (
-      <NotImplementedPage
-        title='Settings'
-        description='Select a section from the Settings menu.'
-      />
-    ),
-  },
 
   // Organisation
   {
