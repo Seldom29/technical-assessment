@@ -4,9 +4,13 @@ import IntegrationServices from './services';
 
 export default function SettingsIntegrationPage() {
     return (
-        <div>
+        <div className='flex h-full flex-col'>
             <IntegrationServices />
-            <IntegrationConnection />
+
+            <div className='flex-1'>
+                <IntegrationConnection />
+            </div>
         </div>
+
     );
 }

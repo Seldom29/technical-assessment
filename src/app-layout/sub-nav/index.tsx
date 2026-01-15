@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { navState, setActiveNavItem } from '@/store/slices/nav.slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import type { NavItemConfig } from '../sidebar/sidebar-nav';
 import { useMemo } from 'react';
+import type { NavItemConfig } from '@/data/nav-items.data';
 
 export default function SubNav() {
     const dispatch = useAppDispatch();

@@ -8,7 +8,7 @@ import {
 import {
     faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import type { Tenant } from '@/data/tenants.mock.data';
+import type { Tenant } from '@/data/data.types';
 
 
 type TenantSwitcherProps = {

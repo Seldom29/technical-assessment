@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { navState } from '@/store/slices/nav.slice';
-import TenantSwitcher, { type Tenant } from './tenant-switcher';
+import TenantSwitcher from './tenant-switcher';
 import { getAllTenantAsync, setTenant, tenantState } from '@/store/slices/tenant.slice';
 import UserProfileDropdown from './user-profile-dropdown';
 import {
@@ -13,6 +13,7 @@ import {
 import {
   faBell,
 } from '@fortawesome/free-regular-svg-icons';
+import type { Tenant } from '@/data/data.types';
 
 export default function Header() {
 
@@ -76,7 +77,7 @@ export default function Header() {
           >
             <FontAwesomeIcon
               icon={faBell}
-              className='text-md text-gray-600 transition-colors group-hover:text-gray-800'
+              className='text-lg text-gray-600 transition-colors group-hover:text-gray-800'
             />
 
             <span

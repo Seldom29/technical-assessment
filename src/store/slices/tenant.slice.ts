@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { TenantApi } from '@/api/tenant.api';
-import type { Tenant } from '@/data/tenants.mock.data';
+import type { Tenant } from '@/data/data.types';
 
 export type TenantState = {
     tenant: Tenant | null;
