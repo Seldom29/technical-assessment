@@ -1,5 +1,4 @@
-import { TENANTS } from "@/data/mock/tenants.data";
-import type { Tenant } from '@/app-layout/header/tenant-switcher';
+import { TENANTS, type Tenant } from '@/data/tenants.mock.data';
 
 export class TenantApi {
     static async getAll(): Promise<Tenant[]> {

@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { TenantApi } from '@/app-layout/api/tenant.api';
-import type { Tenant } from '@/app-layout/header/tenant-switcher';
+import { TenantApi } from '@/api/tenant.api';
+import type { Tenant } from '@/data/tenants.mock.data';
 
 export type TenantState = {
     tenant: Tenant | null;

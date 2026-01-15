@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { NavItemConfig } from '../../app-layout/sidebar/sidebar-nav';
-import { navItems } from '../../data/nav-items.data';
+import { navItems, type NavItemConfig } from '../../data/nav-items.data';
 import type { RootState } from '..';
 
 export type NavState = {

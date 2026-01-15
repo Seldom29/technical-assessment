@@ -1,7 +1,13 @@
 import type { RouteObject } from 'react-router-dom';
+import { lazy, Suspense } from "react";
+
 import { ROUTES } from '@/routes/paths';
 import NotImplementedPage from '@/pages/not-implemented';
 import { relativePath } from '../helper';
+
+const SettingsIntegrations = lazy(
+  () => import("@/pages/settings/integrations")
+);
 
 const settingsRoutes: RouteObject[] = [
 
@@ -20,7 +26,11 @@ const settingsRoutes: RouteObject[] = [
   },
   {
     path: relativePath(ROUTES.settings.integrations),
-    element: <NotImplementedPage title='Integrations' />,
+    element: (
+      <Suspense fallback={<div>Loading…</div>}>
+        <SettingsIntegrations />
+      </Suspense>
+    ),
   },
 
   // Utilities

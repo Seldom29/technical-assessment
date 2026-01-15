@@ -10,7 +10,8 @@ import {
     faCity,
     faTable,
     faTv,
-    faLink
+    faLink,
+    type IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -22,9 +23,17 @@ import {
     faCamera,
 } from '@fortawesome/free-regular-svg-icons';
 
-import type { NavItemConfig } from '../app-layout/sidebar/sidebar-nav';
-
 import { ROUTES } from '@/routes/paths';
+
+export type NavItemConfig = {
+    label: string;
+    icon?: IconDefinition;
+    active?: boolean;
+    route?: string;
+    position?: 'main' | 'footer';
+    children?: NavItemConfig[],
+    disabled?: boolean
+};
 
 export const navItems: NavItemConfig[] = [
     { label: 'Insights', icon: faGaugeHigh, children: [], route: ROUTES.insights },

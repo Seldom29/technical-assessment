@@ -6,7 +6,7 @@ import Sidebar from './sidebar'
 
 export default function AppLayout() {
   return (
-    <div className='h-screen flex bg-page'>
+    <div className='min-h-screen flex bg-page'>
       <Sidebar />
 
       <div className='flex flex-col w-full'>

@@ -1,17 +1,6 @@
 import { useCallback } from 'react';
 import SidebarNavItem from './sidebar-nav-item';
-
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-
-export type NavItemConfig = {
-    label: string;
-    icon?: IconDefinition;
-    active?: boolean;
-    route?: string;
-    position?: 'main' | 'footer';
-    children?: NavItemConfig[],
-    disabled?: boolean
-};
+import type { NavItemConfig } from '@/data/nav-items.data';
 
 type SidebarNavProps = {
     navItems: NavItemConfig[]
@@ -27,8 +16,9 @@ export default function SidebarNav({
     const mainItems = navItems.filter((i) => i.position !== 'footer');
     const footerItems = navItems.filter((i) => i.position === 'footer');
 
-    const isActive = useCallback((name: string) => {
-        return name === activeNavItem?.label
+    const isActive = useCallback((navItem: NavItemConfig) => {
+        return navItem.route === activeNavItem?.route ||
+            navItem.children?.some(n => n.children?.some(c => c.route === activeNavItem?.route))
     }, [activeNavItem?.label])
 
     const handleNavItemClick = useCallback((navItem: NavItemConfig) => () => {
@@ -46,7 +36,7 @@ export default function SidebarNav({
                             icon={item.icon}
                             label={item.label}
                             route={item.route}
-                            active={isActive(item.label)}
+                            active={isActive(item)}
                             onClick={handleNavItemClick(item)}
                         />
                     ))}
@@ -60,7 +50,7 @@ export default function SidebarNav({
                         key={item.label}
                         icon={item.icon}
                         label={item.label}
-                        active={isActive(item.label)}
+                        active={isActive(item)}
                         onClick={handleNavItemClick(item)}
                     />
                 ))}

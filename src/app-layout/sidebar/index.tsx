@@ -1,9 +1,10 @@
-import Logo from '@/assets/images/logo.png'
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { navState, setActiveNavItem } from '@/store/slices/nav.slice';
 
-import SidebarNav, { type NavItemConfig } from './sidebar-nav'
+import SidebarNav from './sidebar-nav'
 import SidebarLogo from './sidebar-logo';
+import Logo from '@/assets/images/bravegen_logo.png'
+import type { NavItemConfig } from '@/data/nav-items.data';
 
 export default function Sidebar() {
 
@@ -15,7 +16,7 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className='h-full flex inset-y-0 grow text-white'>
+        <aside className='min-h-screen flex inset-y-0 grow text-white'>
             <div className='flex w-16 h-full bg-sidebar flex-col items-center py-2'>
                 <SidebarLogo src={Logo} alt='BraveGen' />
                 <SidebarNav navItems={navItems} activeNavItem={activeNavITem} onSelect={handleSetActiveNavItem} />

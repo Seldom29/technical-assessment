@@ -8,11 +8,8 @@ import {
 import {
     faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import type { Tenant } from '@/data/tenants.mock.data';
 
-export type Tenant = {
-    id: number;
-    name: string;
-};
 
 type TenantSwitcherProps = {
     tenants: Tenant[];
